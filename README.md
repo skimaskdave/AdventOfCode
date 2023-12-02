@@ -1,4 +1,4 @@
 # AdventOfCode
-My advent of code solutions using VB.NET (Framework).
+My advent of code solutions using Java.
 
 They worked for me :)
