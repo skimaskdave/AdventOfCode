@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Day3 {
 
@@ -66,8 +67,52 @@ public class Day3 {
     }
 
     public static int checkGears(String[] lines) {
-        System.out.println("Not implemented yet");
-        return 0;
+        String lnBf = "............................................................................................................................................";
+        String lnAf = "............................................................................................................................................";
+        ArrayList<Integer> potentialGearLines = new ArrayList<Integer>();
+        ArrayList<Integer> potentialGearIndexes = new ArrayList<Integer>();
+        ArrayList<String[]> maps = new ArrayList<String[]>();
+        String[] nums = {"", ""};
+        boolean isPartNumber = false;
+        boolean[] posFlags = new boolean[4];
+        int partsSum = 0;
+        // find all the positions in the file of the gears
+        for (int i=0; i<lines.length; i++) {
+            for (int j=0; j<lines[i].length(); j++) {
+                if (lines[i].charAt(j) == '*') {
+                    potentialGearIndexes.add(j);
+                    potentialGearLines.add(i);
+                }
+            }
+        }
+        // generate a (2-3)*(4-7) 'input' around the gear
+        for (int i=0; i<potentialGearLines.size(); i++) {
+            int startI, length, startL, height;
+            height = 3;
+            length = 7;
+            startI = potentialGearIndexes.get(i)-3;
+            startL = potentialGearLines.get(i)-1;
+            // cases where the matrix will be 2 * n
+            if (potentialGearLines.get(i) == 0) {
+                height = 2;
+                startL = 0;
+            }
+            else if (potentialGearLines.get(i) == lines.length) {
+                height = 2;
+                startL = lines.length-1;
+            }
+            // cases where the matrix will be n * (4-7)
+            if (potentialGearIndexes.get(i) < 3) {
+                startI = 0;
+                length = 7-3+potentialGearIndexes.get(i);
+            }
+            else if (potentialGearIndexes.get(i) > lines[0].length()-3) {
+
+            }
+        }
+        // count number of adjacent numbers
+        // calculate gear ratio
+        return partsSum;
     }
 
     public static void main(String[] args) {
