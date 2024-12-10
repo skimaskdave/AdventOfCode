@@ -1,4 +1,4 @@
-data = open("input/test.txt").read()
+data = open("inputs/day5.txt").read()
 data_split = data.split("\n")
 split_index = data_split.index("")
 rules = data_split[:split_index]
@@ -57,31 +57,17 @@ for v in valid_updates:
 
 print(total)
 
-print(invalid_updates)
+part2_total = 0
 for update in invalid_updates:
-    print(update)
-    valid = False
-    i = 0
-    while not valid and i < len(update):
-        value = update[i]
-        before = update[:i]
-        after = update[i + 1:]
-        before_rules = rules_dict[update[i]]["before"]
-        after_rules = rules_dict[update[i]]["after"]
-        change = False
-
-        # while not change and len(before) > 0:
-        #     change = False
-        #     for b in before:
-        #         if b in after_rules:
-        #             print("before: " + str(before))
-        #             print("after: " + str(after))
-        #             after.insert(0, b)
-        #             value = b
-        #             before.insert(before.index(b), value)
-        #             before.remove(b)
-        #             change = True
-                    # print("before: " + str(before))
-                    # print("after: " + str(after))
+    for n in range(len(update)-1, 0, -1):
+        swapped = False
+        for i in range(n):
+            if update[i] in rules_dict[update[i+1]]["after"]:
+                update[i], update[i+1] = update[i+1], update[i]
+                swapped = True
+        if not swapped:
+            break
+    part2_total += update[int(len(update)/2)]
+print(part2_total)
 
 
